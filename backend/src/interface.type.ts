@@ -10,3 +10,12 @@ export interface GoogleUser {
 export interface RequestWithUser extends Request {
   user: GoogleUser;
 }
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  password: string | null;
+  googleId: string;
+  avatar: string;
+}
