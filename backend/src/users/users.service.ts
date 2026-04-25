@@ -35,7 +35,6 @@ export class UsersService {
 
   async getUsers() {
     const users = await this.repo.find();
-    console.log(123, users);
     return users;
   }
 
@@ -45,25 +44,21 @@ export class UsersService {
     });
   }
 
-  async remove(id: number) {
+  async removeUser(id: number) {
     const user = await this.repo.findOneBy({ id });
     if (!user) {
       throw new Error('User not found');
     }
-    console.log(111, id, user);
     await this.repo.remove(user);
     return { message: 'User deleted' };
   }
 
-  async update(id: number, dto: UpdateUserDto) {
+  async updateUser(id: number, dto: UpdateUserDto) {
     const user = await this.repo.findOneBy({ id });
-
     if (!user) {
       throw new Error('User not found');
     }
-
     Object.assign(user, dto);
-
     return this.repo.save(user);
   }
 }

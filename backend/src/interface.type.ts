@@ -19,3 +19,8 @@ export interface User {
   googleId: string;
   avatar: string;
 }
+
+export interface JwtPayload {
+  sub: number;
+  email: string;
+}
