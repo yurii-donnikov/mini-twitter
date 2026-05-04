@@ -15,6 +15,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
+    // console.log('GOOGLE STRATEGY HIT');
+    // console.log(profile);
     const user = await this.usersService.findOrCreate({
       email: profile.emails![0].value,
       username: profile.displayName,
