@@ -9,14 +9,12 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: 'http://localhost:3000/auth/google/redirect',
+      callbackURL: 'http://localhost:3000/api/auth/google/redirect',
       scope: ['email', 'profile'],
     });
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
-    // console.log('GOOGLE STRATEGY HIT');
-    // console.log(profile);
     const user = await this.usersService.findOrCreate({
       email: profile.emails![0].value,
       username: profile.displayName,

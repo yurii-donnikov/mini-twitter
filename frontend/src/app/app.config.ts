@@ -8,14 +8,18 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authReducer } from './store/auth/auth.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
+import { userReducer } from './store/user';
+import { UserEffects } from './store/user';
+//import { Store } from './store/app.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideEffects(AuthEffects),
+    provideEffects([AuthEffects, UserEffects]),
     provideRouter(routes),
-    provideStore({ auth: authReducer }),
-    provideEffects([]),
+    provideStore({ auth: authReducer, user: userReducer }),
+    //provideStore({Store}),
+
     provideStoreDevtools({
       maxAge: 25,
       logOnly: false,

@@ -24,3 +24,10 @@ export interface JwtPayload {
   sub: number;
   email: string;
 }
+
+export interface JwtUser {
+  user: {
+    id: number;
+    email: string;
+  };
+}
