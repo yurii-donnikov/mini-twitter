@@ -13,26 +13,23 @@ export class AuthService {
   ) {}
 
   async login(email: string) {
-    // const payload = {
-    //   email: email,
-    // };
     const user = await this.repo.findOne({
       where: { email: email },
     });
 
     const payload = {
-      id: user?.id,
+      sub: user?.id,
       email: user?.email,
     };
 
-    console.log(5555, user, 111, payload);
-
     const access_token = this.jwtService.sign(payload);
-
     return { user, token: access_token };
   }
 
-  login2() {
-    console.log(123);
+  async getMe(id: number) {
+    const user = await this.repo.findOne({
+      where: { id: id },
+    });
+    return user;
   }
 }

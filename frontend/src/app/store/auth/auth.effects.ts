@@ -1,30 +1,30 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError, of } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
+import { AuthApi } from '../../core/api/auth.api';
+import { loginFailure, loginSuccess } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private actions$: Actions,
-    private http: HttpClient,
-  ) {}
+  private authApi = inject(AuthApi);
+  private actions$ = inject(Actions);
 
-  // loadUserFromToken$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.loadUserFromToken),
-  //     switchMap(() =>
-  //       this.http.get<any>('http://localhost:3000/auth/me').pipe(
-  //         map((user) => AuthActions.setUser({ user })),
-  //         catchError(() => of(AuthActions.logout())),
-  //       ),
-  //     ),
-  //   ),
-  // );
+  loadUserFromToken$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadUserFromToken),
+      switchMap(() =>
+        this.authApi.me().pipe(
+          map((user) => {
+            console.log(user);
+            return loginSuccess(user);
+          }),
 
-  loadUserFromToken$() {
-    console.log(123);
-  }
+          catchError((err) => of(loginFailure({ error: err }))),
+        ),
+      ),
+    );
+  });
 }

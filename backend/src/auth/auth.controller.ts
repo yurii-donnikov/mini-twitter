@@ -1,8 +1,8 @@
 import { Controller, Get, Req, UseGuards, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import type { RequestWithUser } from 'src/interface.type';
+import type { JwtUser, RequestWithUser } from 'src/interface.type';
 import { AuthService } from './auth.service';
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -21,12 +21,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('/me')
-  getUser(@Req() req: RequestWithUser) {
-    console.log(123456, req.user);
-    //return req.user;
-    return this.authService.login2();
+  getMe(@Req() req: JwtUser) {
+    return this.authService.getMe(req.user.id);
   }
-  // getMe(@Req() req) {
-  // return req.user;
-  //}
 }
