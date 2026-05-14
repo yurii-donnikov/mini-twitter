@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError, of } from 'rxjs';
-
 import * as AuthActions from './auth.actions';
 import { AuthApi } from '../../core/api/auth.api';
 import { loginFailure, loginSuccess } from './auth.actions';
@@ -18,8 +16,7 @@ export class AuthEffects {
       switchMap(() =>
         this.authApi.me().pipe(
           map((user) => {
-            console.log(user);
-            return loginSuccess(user);
+            return loginSuccess({ user });
           }),
 
           catchError((err) => of(loginFailure({ error: err }))),

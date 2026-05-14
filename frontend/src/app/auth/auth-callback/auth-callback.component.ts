@@ -16,7 +16,6 @@ export class AuthCallbackComponent {
   ) {}
 
   ngOnInit() {
-    alert(1);
     this.route.queryParams.subscribe((params) => {
       const token = params['token'];
 

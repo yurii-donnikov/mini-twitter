@@ -4,12 +4,10 @@ import { CanActivateFn, Router } from '@angular/router';
 export const guestGuard: CanActivateFn = () => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
-
-  //   if (token) {
-  //     router.navigate(['/home']);
-  //     return false;
-  //   }
-
-  //   return true;
+  alert('guestGuard');
+  // if (!token) {
+  //   router.navigate(['/login']);
+  //   return false;
+  // }
   return true;
 };
