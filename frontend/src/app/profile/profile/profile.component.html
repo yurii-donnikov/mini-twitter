@@ -1,1 +1,6 @@
-<p>profile works!</p>
+<div>
+  @if (isAuthenticated$ | async) {
+    <button class="btn btn--outline" (click)="logout()">Logout</button>
+  }
+  profile
+</div>

@@ -5,5 +5,8 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 
 export const authRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
-  { path: 'auth/callback', component: AuthCallbackComponent },
+  {
+    path: 'auth/callback',
+    component: AuthCallbackComponent,
+  },
 ];
