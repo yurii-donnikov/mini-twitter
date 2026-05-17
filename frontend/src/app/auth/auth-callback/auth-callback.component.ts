@@ -6,7 +6,7 @@ import { loadUserFromToken } from '../../store/auth';
 @Component({
   selector: 'app-auth-callback',
   imports: [],
-  templateUrl: './auth-callback.component.html',
+  template: '',
 })
 export class AuthCallbackComponent {
   constructor(
