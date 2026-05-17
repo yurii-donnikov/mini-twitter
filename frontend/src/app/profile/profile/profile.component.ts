@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { logout, selectIsAuthenticated } from '../../store/auth';
+import { logout, selectIsAuthenticated, selectProfile } from '../../store/auth';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,10 +14,11 @@ import { CommonModule } from '@angular/common';
 export class ProfileComponent {
   private store = inject(Store);
   private router = inject(Router);
-  isAuthenticated$ = this.store.select(selectIsAuthenticated);
+  readonly isAuthenticated$ = this.store.select(selectIsAuthenticated);
+  readonly user$ = this.store.select(selectProfile);
   logout() {
-    // this.store.dispatch(logout());
-    // localStorage.removeItem('token');
-    // this.router.navigate(['/login']);
+    this.store.dispatch(logout());
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

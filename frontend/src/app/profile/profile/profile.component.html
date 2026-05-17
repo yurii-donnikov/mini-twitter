@@ -3,4 +3,9 @@
     <button class="btn btn--outline" (click)="logout()">Logout</button>
   }
   profile
+
+  <ng-container *ngIf="user$ | async as user">
+    <p class="user-data__name">{{ user.username }}</p>
+    <p class="user-data__email">{{ user.email }}</p>
+  </ng-container>
 </div>
