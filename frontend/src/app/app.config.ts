@@ -15,8 +15,10 @@ import { postReducer } from './store/post/post.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
 import { userReducer } from './store/user/user.reducer';
 import { UserEffects } from './store/user/user.effects';
+import { PostEffects } from './store/post/post.effects';
 import { AuthApi } from './core/api/auth.api';
 import { initAuthFactory } from './core/auth/init-auth.factory';
+import { clearStateReducer } from './store/auth/meta.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,12 +30,17 @@ export const appConfig: ApplicationConfig = {
     },
     provideZoneChangeDetection({ eventCoalescing: true }),
 
-    provideStore({
-      posts: postReducer,
-      auth: authReducer,
-      profile: userReducer,
-    }),
-    provideEffects([AuthEffects, UserEffects]),
+    provideStore(
+      {
+        post: postReducer,
+        auth: authReducer,
+        profile: userReducer,
+      },
+      {
+        metaReducers: [clearStateReducer],
+      },
+    ),
+    provideEffects([AuthEffects, UserEffects, PostEffects]),
     provideRouter(routes),
 
     provideStoreDevtools({

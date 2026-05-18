@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 export function initAuthFactory(store: Store) {
   return () => {
     const token = localStorage.getItem('token');
+    console.log(token);
     if (!token) {
       store.dispatch(logout());
       return of(true);

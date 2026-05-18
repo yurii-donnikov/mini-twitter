@@ -11,6 +11,20 @@ export class PostService {
     private readonly postRepository: Repository<Post>,
   ) {}
 
+  async getMyPosts(id: number) {
+    const posts = await this.postRepository.findOne({
+      where: {
+        author: { id },
+      },
+    });
+    return posts;
+  }
+
+  async getAllPosts() {
+    const posts = await this.postRepository.find();
+    return posts;
+  }
+
   async createPost(content: string, user: User) {
     const post = this.postRepository.create({
       content,
