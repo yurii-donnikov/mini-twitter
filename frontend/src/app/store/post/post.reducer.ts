@@ -1,18 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
-import * as AuthActions from '../auth/auth.actions';
-
-export interface PostState {
-  posts: number;
-}
+import * as PostActions from './post.actions';
+import { PostState } from './post.models';
 
 const initialState: PostState = {
-  posts: 1,
+  posts: null,
 };
 
 export const postReducer = createReducer(
   initialState,
-  on(AuthActions.loginSuccess, (state, user) => ({
+  on(PostActions.loadPostsSuccess, (state, { posts }) => ({
     ...state,
-    posts: 232,
+    posts: posts,
+  })),
+  on(PostActions.loadPostsFailure, (state, notification) => ({
+    ...state,
   })),
 );

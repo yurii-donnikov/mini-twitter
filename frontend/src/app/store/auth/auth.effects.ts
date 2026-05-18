@@ -4,6 +4,7 @@ import { switchMap, map, catchError, of } from 'rxjs';
 import * as AuthActions from './auth.actions';
 import { AuthApi } from '../../core/api/auth.api';
 import { loginFailure, loginSuccess } from './auth.actions';
+import { loadMyPosts } from '../post/post.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -15,9 +16,7 @@ export class AuthEffects {
       ofType(AuthActions.loadUserFromToken),
       switchMap(() =>
         this.authApi.me().pipe(
-          map((user) => {
-            return loginSuccess({ user });
-          }),
+          switchMap((user) => [loginSuccess({ user }), loadMyPosts()]),
 
           catchError((err) => of(loginFailure({ error: err }))),
         ),
