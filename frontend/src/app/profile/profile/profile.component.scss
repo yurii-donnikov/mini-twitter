@@ -1,0 +1,36 @@
+.profile-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+.profile-layout__sidebar {
+  position: sticky;
+  top: 90px;
+  align-self: start;
+}
+
+.profile-layout__content {
+  min-width: 0;
+}
+
+@media (max-width: 992px) {
+  .profile-layout {
+    grid-template-columns: 280px 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-layout__sidebar {
+    position: static;
+  }
+}

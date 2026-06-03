@@ -1,1 +1,14 @@
-<p>header works!</p>
+<header class="header">
+  <a href="/" class="header__logo">
+    <div class="header__logo-icon">T</div>
+
+    <div class="header__branding">
+      <p class="header__title">TaskBird</p>
+      <span class="header__subtitle">social productivity</span>
+    </div>
+  </a>
+
+  @if (isAuthenticated$ | async) {
+    <button class="btn btn--logout" (click)="logout()">Logout</button>
+  }
+</header>
