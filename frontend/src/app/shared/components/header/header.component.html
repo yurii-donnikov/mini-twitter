@@ -11,4 +11,6 @@
   @if (isAuthenticated$ | async) {
     <button class="btn btn--logout" (click)="logout()">Logout</button>
   }
+
+  <button class="btn btn--logout" (click)="getJwt()">getJwt</button>
 </header>
