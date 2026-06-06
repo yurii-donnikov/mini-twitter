@@ -1,0 +1,165 @@
+.post-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+
+  padding: 20px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #1d9bf0;
+
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.08),
+    0 18px 40px rgba(15, 23, 42, 0.1);
+}
+
+.post-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.post-card__avatar {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 2px solid #1d9bf0;
+
+  flex-shrink: 0;
+}
+
+.post-card__user {
+  width: 100%;
+  min-width: 0;
+}
+
+.post-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.post-card__name {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.post-card__date {
+  color: #64748b;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+.post-card__email {
+  margin: 4px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-card__content {
+  color: #1e293b;
+
+  font-size: 16px;
+  line-height: 1.7;
+
+  word-break: break-word;
+}
+
+.post-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.post-card__action {
+  border: none;
+  border-radius: 999px;
+
+  background: #f8fafc;
+
+  color: #64748b;
+
+  padding: 10px 14px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.post-card__action:hover {
+  background: rgba(29, 155, 240, 0.1);
+
+  color: #1d9bf0;
+
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .post-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .post-card__avatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .post-card__name {
+    font-size: 16px;
+  }
+
+  .post-card__content {
+    font-size: 15px;
+  }
+
+  .post-card__actions {
+    flex-wrap: wrap;
+  }
+
+  .post-card__action {
+    width: 100%;
+  }
+}

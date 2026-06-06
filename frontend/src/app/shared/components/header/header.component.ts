@@ -13,11 +13,15 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   private store = inject(Store);
   private router = inject(Router);
-  isAuthenticated$ = this.store.select(selectIsAuthenticated);
+  readonly isAuthenticated$ = this.store.select(selectIsAuthenticated);
 
   logout() {
     this.store.dispatch(logout());
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  getJwt() {
+    console.log(localStorage.getItem('token'));
   }
 }

@@ -1,0 +1,65 @@
+.feed {
+  width: 100%;
+}
+
+.feed__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feed__post {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.feed__post:hover {
+  transform: translateY(-2px);
+}
+
+.feed__empty {
+  min-height: 320px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 48px 24px;
+
+  border-radius: 24px;
+
+  background: #16181c;
+
+  border: 1px dashed #2f3336;
+}
+
+.feed__empty-icon {
+  font-size: 52px;
+
+  margin-bottom: 18px;
+}
+
+.feed__empty-title {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  color: white;
+}
+
+.feed__empty-text {
+  margin-top: 12px;
+
+  max-width: 320px;
+
+  line-height: 1.6;
+
+  color: #8b98a5;
+
+  font-size: 15px;
+}

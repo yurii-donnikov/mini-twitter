@@ -1,1 +1,23 @@
-<p>post-feed works!</p>
+<div class="feed">
+  <div class="feed__content">
+    @if (posts$ | async; as posts) {
+      @if (posts.length > 0) {
+        @for (post of posts; track post.id) {
+          <div cdkDrag class="feed__post">
+            <app-post-card [post]="post" />
+          </div>
+        }
+      } @else {
+        <div class="feed__empty">
+          <div class="feed__empty-icon">✨</div>
+
+          <h3 class="feed__empty-title">No posts yet</h3>
+
+          <p class="feed__empty-text">
+            Be the first to share something with the world.
+          </p>
+        </div>
+      }
+    }
+  </div>
+</div>
