@@ -1,10 +1,17 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { Post } from '../../../store/post';
-import { DatePipe } from '@angular/common';
+import { DatePipe, AsyncPipe } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { selectProfile } from '../../../store/auth';
 
 @Component({
   selector: 'app-post-card',
-  imports: [DatePipe],
+  imports: [DatePipe, AsyncPipe],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,4 +19,13 @@ import { DatePipe } from '@angular/common';
 })
 export class PostCardComponent {
   @Input() post!: Post;
+  private store = inject(Store);
+
+  readonly user$ = this.store.select(selectProfile);
+
+  deletePost(id: number) {
+    console.log('delete', id);
+
+    // dispatch delete action
+  }
 }

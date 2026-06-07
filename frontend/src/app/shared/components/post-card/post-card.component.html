@@ -29,5 +29,12 @@
 
   <div class="post-card__actions">
     <button class="post-card__action">💬 Reply</button>
+    @if (user$ | async; as user) {
+      @if (user?.id === post.author.id) {
+        <button class="post-card__delete" (click)="deletePost(post.id)">
+          Delete
+        </button>
+      }
+    }
   </div>
 </div>

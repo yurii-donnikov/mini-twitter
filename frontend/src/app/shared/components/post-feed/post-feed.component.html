@@ -1,4 +1,5 @@
 <div class="feed">
+  <app-post-composer />
   <div class="feed__content">
     @if (posts$ | async; as posts) {
       @if (posts.length > 0) {

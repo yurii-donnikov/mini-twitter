@@ -12,7 +12,4 @@ import { CommonModule } from '@angular/common';
 export class UserCardComponent {
   private store = inject(Store);
   readonly user$ = this.store.select(selectProfile);
-  constructor() {
-    console.log(this.user$);
-  }
 }

@@ -1,0 +1,32 @@
+<div class="composer">
+  <div class="composer__header">
+    <h3>Create post</h3>
+
+    <p>Share your thoughts</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="composer__form">
+    <textarea
+      formControlName="content"
+      class="composer__textarea"
+      placeholder="What's happening?"
+    ></textarea>
+
+    @if (
+      form.controls.content.touched &&
+      form.controls.content.hasError("required")
+    ) {
+      <p class="composer__error">Post cannot be empty</p>
+    }
+
+    @if (form.controls.content.hasError("maxlength")) {
+      <p class="composer__error">Maximum 280 characters</p>
+    }
+
+    <div class="composer__footer">
+      <span> {{ form.value.content?.length || 0 }}/280 </span>
+
+      <button type="submit" [disabled]="form.invalid">Save</button>
+    </div>
+  </form>
+</div>
