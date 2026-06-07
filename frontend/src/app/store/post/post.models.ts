@@ -12,6 +12,10 @@ export interface Post {
   };
 }
 
+export interface ComposeredPost {
+  content: string;
+}
+
 export interface PostState {
   posts: [Post] | null;
 }

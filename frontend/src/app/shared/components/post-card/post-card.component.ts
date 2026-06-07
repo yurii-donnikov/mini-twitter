@@ -8,6 +8,7 @@ import { Post } from '../../../store/post';
 import { DatePipe, AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectProfile } from '../../../store/auth';
+import { deletePost } from '../../../store/post';
 
 @Component({
   selector: 'app-post-card',
@@ -24,8 +25,6 @@ export class PostCardComponent {
   readonly user$ = this.store.select(selectProfile);
 
   deletePost(id: number) {
-    console.log('delete', id);
-
-    // dispatch delete action
+    this.store.dispatch(deletePost({ id }));
   }
 }

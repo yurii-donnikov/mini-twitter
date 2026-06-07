@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Post } from './post.models';
+import { Post, ComposeredPost } from './post.models';
 
 export const loadMyPosts = createAction('[Post] Load Posts From Token');
 
@@ -19,4 +19,14 @@ export const loadFollowerPosts = createAction(
 
 export const loadFollowerSuccess = createAction(
   '[Post] Loading  Followers Posts Success',
+);
+
+export const createPost = createAction(
+  '[Post] Creating Post',
+  props<{ post: ComposeredPost }>(),
+);
+
+export const deletePost = createAction(
+  '[Post] Deleting Post',
+  props<{ id: number }>(),
 );

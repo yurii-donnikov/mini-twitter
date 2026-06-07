@@ -21,12 +21,28 @@ export class PostService {
   }
 
   async getAllPosts() {
-    const posts = await this.postRepository.find({
+    return await this.postRepository.find({
       relations: {
         author: true,
       },
+
+      select: {
+        id: true,
+        content: true,
+        createdAt: true,
+
+        author: {
+          id: true,
+          username: true,
+          email: true,
+          avatar: true,
+        },
+      },
+
+      order: {
+        createdAt: 'DESC',
+      },
     });
-    return posts;
   }
 
   async createPost(content: string, user: User) {
@@ -35,7 +51,9 @@ export class PostService {
       author: user,
     });
 
-    return this.postRepository.save(post);
+    await this.postRepository.save(post);
+
+    return this.getAllPosts();
   }
 
   async getPosts(id: number) {
@@ -46,12 +64,12 @@ export class PostService {
     });
   }
 
-  async removePost(id: number) {
+  async deletePost(id: number) {
     const post = await this.postRepository.findOneBy({ id });
     if (!post) {
       throw new Error('post not found');
     }
     await this.postRepository.remove(post);
-    return { message: 'post deleted' };
+    return this.getAllPosts();
   }
 }
