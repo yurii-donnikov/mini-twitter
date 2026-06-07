@@ -1,0 +1,134 @@
+.composer {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 10px 24px;
+  margin: 0 0 10px 0;
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.composer__header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.composer__header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.composer__form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.composer__textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  padding: 18px;
+  border: 1px solid #dbe2ea;
+  border-radius: 20px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 16px;
+  line-height: 1.7;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+  font-family: inherit;
+}
+
+.composer__textarea:focus {
+  border-color: #1d9bf0;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(29, 155, 240, 0.12);
+}
+
+.composer__textarea::placeholder {
+  color: #94a3b8;
+}
+
+.composer__error {
+  margin: -8px 0 0;
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.composer__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.composer__footer span {
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.composer__footer button {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #1d9bf0, #6c5ce7);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.composer__footer button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(29, 155, 240, 0.25);
+}
+
+.composer__footer button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.composer__footer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .composer {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .composer__header h3 {
+    font-size: 20px;
+  }
+
+  .composer__textarea {
+    min-height: 140px;
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  .composer__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .composer__footer button {
+    width: 100%;
+  }
+}
