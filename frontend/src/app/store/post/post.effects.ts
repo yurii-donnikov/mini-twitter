@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, of } from 'rxjs';
 import { PostApi } from '../../core/api/post.api';
-import { loadMyPosts } from './post.actions';
 import * as PostActions from './post.actions';
 
 @Injectable()
@@ -17,6 +16,36 @@ export class PostEffects {
         this.postApi.myPosts().pipe(
           map((posts) => {
             return PostActions.loadPostsSuccess({ posts });
+          }),
+
+          catchError((err) => of(PostActions.loadPostsFailure({ error: err }))),
+        ),
+      ),
+    );
+  });
+
+  createPost$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PostActions.createPost),
+      switchMap(({ post }) =>
+        this.postApi.createPost(post).pipe(
+          map((post) => {
+            return PostActions.loadPostsSuccess({ posts: post });
+          }),
+
+          catchError((err) => of(PostActions.loadPostsFailure({ error: err }))),
+        ),
+      ),
+    );
+  });
+
+  deletePost$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PostActions.deletePost),
+      switchMap(({ id }) =>
+        this.postApi.deletePost(id).pipe(
+          map((post) => {
+            return PostActions.loadPostsSuccess({ posts: post });
           }),
 
           catchError((err) => of(PostActions.loadPostsFailure({ error: err }))),

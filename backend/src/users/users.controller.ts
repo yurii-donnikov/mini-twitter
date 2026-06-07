@@ -21,12 +21,6 @@ export class UsersController {
     return this.usersService.getUsers();
   }
 
-  // @UseGuards(AuthGuard('jwt'))
-  // @Get('/me')
-  // getUser(): any {
-  //   return this.usersService.getUsers();
-  // }
-
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   removeUser(@Param('id') id: string) {

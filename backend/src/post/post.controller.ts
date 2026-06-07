@@ -34,11 +34,8 @@ export class PostController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  async createPost(
-    @Body('content') content: string,
-    @Body('userId') userId: number,
-  ) {
-    const user = await this.usersService.getUser(userId);
+  async createPost(@Body('content') content: string, @Req() req: JwtUser) {
+    const user = await this.usersService.getUser(req.user.id);
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -54,6 +51,6 @@ export class PostController {
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   removeUser(@Param('id') id: string) {
-    return this.postService.removePost(Number(id));
+    return this.postService.deletePost(Number(id));
   }
 }

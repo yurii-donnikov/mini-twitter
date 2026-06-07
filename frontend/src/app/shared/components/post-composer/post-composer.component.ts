@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { createPost } from '../../../store/post';
 
 @Component({
   selector: 'app-post-composer',
@@ -10,9 +12,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class PostComposerComponent {
   private fb = inject(FormBuilder);
+  private store = inject(Store);
   readonly maxLength = 280;
-  readonly form = this.fb.group({
-    content: ['', [Validators.required, Validators.maxLength(this.maxLength)]],
+  readonly form = this.fb.nonNullable.group({
+    content: ['', [Validators.required, Validators.maxLength(280)]],
   });
 
   submit() {
@@ -21,8 +24,11 @@ export class PostComposerComponent {
       return;
     }
 
-    console.log(this.form.value);
-
+    this.store.dispatch(
+      createPost({
+        post: this.form.getRawValue(),
+      }),
+    );
     this.form.reset();
   }
 }
