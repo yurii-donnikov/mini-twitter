@@ -9,6 +9,7 @@ import { DatePipe, AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectProfile } from '../../../store/auth';
 import { deletePost } from '../../../store/post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -21,10 +22,15 @@ import { deletePost } from '../../../store/post';
 export class PostCardComponent {
   @Input() post!: Post;
   private store = inject(Store);
+  private router = inject(Router);
 
   readonly user$ = this.store.select(selectProfile);
 
   deletePost(id: number) {
     this.store.dispatch(deletePost({ id }));
+  }
+
+  openProfile(id: number) {
+    this.router.navigate(['/profile', id]);
   }
 }

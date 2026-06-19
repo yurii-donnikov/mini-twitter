@@ -22,6 +22,12 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @Get(':id')
+  getUser(@Param('id') id: string) {
+    return this.usersService.getUser(Number(id));
+  }
+
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   removeUser(@Param('id') id: string) {
     return this.usersService.removeUser(Number(id));

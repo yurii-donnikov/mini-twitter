@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadUserFromToken } from '../../store/auth';
+import { loadUserFromToken, selectProfile } from '../../store/auth';
 
 @Component({
   selector: 'app-auth-callback',
@@ -9,11 +9,10 @@ import { loadUserFromToken } from '../../store/auth';
   template: '',
 })
 export class AuthCallbackComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store,
-  ) {}
+  private store = inject(Store);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  readonly user$ = this.store.select(selectProfile);
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -22,7 +21,10 @@ export class AuthCallbackComponent {
       if (token) {
         localStorage.setItem('token', token);
         this.store.dispatch(loadUserFromToken());
-        this.router.navigate(['/profile']);
+        this.user$.pipe().subscribe((user) => {
+          if (!user) return;
+          this.router.navigate(['/profile', user.id]);
+        });
       }
     });
   }

@@ -1,15 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { selectIsAuthenticated, selectProfile } from '../../../store/auth';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { User } from '../../../store/user/user.models';
 
 @Component({
   selector: 'app-user-card',
-  imports: [CommonModule],
+  standalone: true,
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-  private store = inject(Store);
-  readonly user$ = this.store.select(selectProfile);
+  @Input({ required: true })
+  user!: User;
 }

@@ -4,11 +4,12 @@
       class="post-card__avatar"
       [src]="post.author.avatar"
       [alt]="post.author.username"
+      (click)="openProfile(post.author.id)"
     />
 
     <div class="post-card__user">
       <div class="post-card__top">
-        <h4 class="post-card__name">
+        <h4 class="post-card__name" (click)="openProfile(post.author.id)">
           {{ post.author.username }}
         </h4>
 
