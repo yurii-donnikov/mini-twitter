@@ -1,7 +1,6 @@
 <div class="composer">
   <div class="composer__header">
     <h3>Create post</h3>
-
     <p>Share your thoughts</p>
   </div>
 
@@ -25,7 +24,6 @@
 
     <div class="composer__footer">
       <span> {{ form.value.content?.length || 0 }}/280 </span>
-
       <button type="submit" [disabled]="form.invalid">Save</button>
     </div>
   </form>

@@ -8,11 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { PostFeedComponent } from '../../shared/components/post-feed/post-feed.component';
-import { UserCardComponent } from '../../shared/components/user-card/user-card.component';
-import { loadUser } from '../../store/user';
-import { selectUser } from '../../store/user';
-import { selectProfile } from '../../store/auth';
+import { PostFeedComponent } from '../../post/components/post-feed/post-feed.component';
+import { UserCardComponent } from '../components/user-card/user-card.component';
+import { loadUser } from '../../store/user/user.actions';
+import { selectUser } from '../../store/user/user.selectors';
+import { selectProfile } from '../../store/auth/auth.selectors';
 import { RouterLink } from '@angular/router';
 
 @Component({

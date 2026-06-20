@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadUserFromToken, selectProfile } from '../../store/auth';
+import { loadUserFromToken } from '../../store/auth/auth.actions';
+import { selectProfile } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-auth-callback',

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { createPost } from '../../../store/post';
+import { createPost } from '../../../store/post/post.actions';
 
 @Component({
   selector: 'app-post-composer',

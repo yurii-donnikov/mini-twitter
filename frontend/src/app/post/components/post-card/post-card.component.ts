@@ -4,11 +4,11 @@ import {
   inject,
   Input,
 } from '@angular/core';
-import { Post } from '../../../store/post';
+import { Post } from '../../../store/post/post.models';
 import { DatePipe, AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { selectProfile } from '../../../store/auth';
-import { deletePost } from '../../../store/post';
+import { selectProfile } from '../../../store/auth/auth.selectors';
+import { deletePost } from '../../../store/post/post.actions';
 import { Router } from '@angular/router';
 
 @Component({

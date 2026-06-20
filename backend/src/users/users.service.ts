@@ -29,7 +29,6 @@ export class UsersService {
       });
       await this.repo.save(user);
     }
-
     return user;
   }
 
