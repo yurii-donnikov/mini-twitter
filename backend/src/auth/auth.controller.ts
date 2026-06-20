@@ -15,7 +15,6 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Req() req: RequestWithUser, @Res() res: Response) {
     const { token } = await this.authService.login(req.user.email);
-
     return res.redirect(`http://localhost:4200/auth/callback?token=${token}`);
   }
 

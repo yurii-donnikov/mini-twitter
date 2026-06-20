@@ -50,9 +50,7 @@ export class PostService {
       content,
       author: user,
     });
-
     await this.postRepository.save(post);
-
     return this.getAllPosts();
   }
 

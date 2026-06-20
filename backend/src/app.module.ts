@@ -20,7 +20,7 @@ import { PostModule } from './post/post.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: true, // ⚠️ только для разработки
+      synchronize: true,
     }),
     UsersModule,
 

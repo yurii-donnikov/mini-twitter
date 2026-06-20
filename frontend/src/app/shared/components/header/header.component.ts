@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectIsAuthenticated, logout } from '../../../store/auth';
+import { selectIsAuthenticated } from '../../../store/auth/auth.selectors';
+import { logout } from '../../../store/auth/auth.actions';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,9 +20,5 @@ export class HeaderComponent {
     this.store.dispatch(logout());
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
-  }
-
-  getJwt() {
-    console.log(localStorage.getItem('token'));
   }
 }
