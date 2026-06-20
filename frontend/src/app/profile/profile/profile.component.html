@@ -1,6 +1,18 @@
 <div class="profile-layout">
   <aside class="profile-layout__sidebar">
-    <app-user-card />
+    <div class="profile-layout__sidebar-inner">
+      @if (showMyProfileButton$ | async) {
+        <a
+          class="profile-layout__home-btn"
+          [routerLink]="['/profile', (loggedUser$ | async)?.id]"
+        >
+          ← My profile
+        </a>
+      }
+      <aside class="profile-layout__sidebar" *ngIf="user$ | async as user">
+        <app-user-card [user]="user" />
+      </aside>
+    </div>
   </aside>
 
   <main class="profile-layout__content">

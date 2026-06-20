@@ -1,15 +1,21 @@
 <div class="user-card">
-  <ng-container *ngIf="user$ | async as user">
-    <img class="user-card__avatar" [src]="user.avatar" [alt]="user.username" />
+  <ng-container>
+    @if (user) {
+      <img
+        class="user-card__avatar"
+        [src]="user.avatar"
+        [alt]="user.username"
+      />
 
-    <div class="user-card__content">
-      <h3 class="user-card__name">
-        {{ user.username }}
-      </h3>
+      <div class="user-card__content">
+        <h3 class="user-card__name">
+          {{ user.username }}
+        </h3>
 
-      <p class="user-card__email">
-        {{ user.email }}
-      </p>
-    </div>
+        <p class="user-card__email">
+          {{ user.email }}
+        </p>
+      </div>
+    }
   </ng-container>
 </div>
