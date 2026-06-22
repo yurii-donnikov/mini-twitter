@@ -24,6 +24,7 @@ export class AuthCallbackComponent {
         this.store.dispatch(loadUserFromToken());
         this.user$.pipe().subscribe((user) => {
           if (!user) return;
+          localStorage.setItem('userId', String(user.id));
           this.router.navigate(['/profile', user.id]);
         });
       }
