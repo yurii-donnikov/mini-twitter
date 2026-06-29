@@ -1,11 +1,17 @@
 import { createAction, props } from '@ngrx/store';
-import { Post, ComposeredPost } from './post.models';
+import { Post, ComposeredPost, PostsResponse } from './post.models';
 
-export const loadMyPosts = createAction('[Post] Load Posts From Token');
+export const loadMyPosts = createAction(
+  '[Post] Load My Posts',
+  props<{ page: number; limit: number }>(),
+);
 
 export const loadPostsSuccess = createAction(
   '[Post] Loading Success',
-  props<{ posts: [Post] }>(),
+  props<{
+    posts: Post[];
+    meta: PostsResponse['meta'];
+  }>(),
 );
 
 export const loadPostsFailure = createAction(

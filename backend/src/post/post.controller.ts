@@ -8,11 +8,13 @@ import {
   UseGuards,
   Delete,
   Req,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { PostService } from './post.service';
 import { AuthGuard } from '@nestjs/passport';
 import type { JwtUser } from 'src/interface.type';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Controller('post')
 export class PostController {
@@ -28,8 +30,8 @@ export class PostController {
   }
 
   @Get('/posts')
-  getAllPosts() {
-    return this.postService.getAllPosts();
+  getAllPosts(@Query() paginationDto: PaginationDto) {
+    return this.postService.getAllPosts(paginationDto);
   }
 
   @UseGuards(AuthGuard('jwt'))

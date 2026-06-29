@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
 import { Repository } from 'typeorm';
 import { Post } from './post.entity';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Injectable()
 export class PostService {
@@ -20,8 +21,11 @@ export class PostService {
     return posts;
   }
 
-  async getAllPosts() {
-    return await this.postRepository.find({
+  async getAllPosts(paginationDto: PaginationDto) {
+    const { page, limit } = paginationDto;
+    const [posts, total] = await this.postRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
       relations: {
         author: true,
       },
@@ -43,6 +47,15 @@ export class PostService {
         createdAt: 'DESC',
       },
     });
+    return {
+      data: posts,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
   }
 
   async createPost(content: string, user: User) {
@@ -50,8 +63,7 @@ export class PostService {
       content,
       author: user,
     });
-    await this.postRepository.save(post);
-    return this.getAllPosts();
+    return await this.postRepository.save(post);
   }
 
   async getPosts(id: number) {
@@ -68,6 +80,5 @@ export class PostService {
       throw new Error('post not found');
     }
     await this.postRepository.remove(post);
-    return this.getAllPosts();
   }
 }

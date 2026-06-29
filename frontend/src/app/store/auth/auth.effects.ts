@@ -16,7 +16,13 @@ export class AuthEffects {
       ofType(AuthActions.loadUserFromToken),
       switchMap(() =>
         this.authApi.me().pipe(
-          switchMap((user) => [loginSuccess({ user }), loadMyPosts()]),
+          switchMap((user) => [
+            loginSuccess({ user }),
+            loadMyPosts({
+              page: 1,
+              limit: 10,
+            }),
+          ]),
 
           catchError((err) => of(loginFailure({ error: err }))),
         ),
