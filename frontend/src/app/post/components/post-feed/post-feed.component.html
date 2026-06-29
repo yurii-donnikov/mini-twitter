@@ -21,4 +21,31 @@
       }
     }
   </div>
+  @let page = (page$ | async)!;
+  @let totalPages = (totalPages$ | async)!;
+  @let limit = (limit$ | async)!;
+
+  <div class="pagination">
+    <button
+      class="pagination__button"
+      (click)="previousPage(page, limit)"
+      [disabled]="page === 1"
+    >
+      ← Previous
+    </button>
+
+    <div class="pagination__info">
+      <span class="pagination__page">{{ page }}</span>
+      <span class="pagination__separator">/</span>
+      <span>{{ totalPages }}</span>
+    </div>
+
+    <button
+      class="pagination__button"
+      (click)="nextPage(page, totalPages, limit)"
+      [disabled]="page === totalPages"
+    >
+      Next →
+    </button>
+  </div>
 </div>
