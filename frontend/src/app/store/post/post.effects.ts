@@ -17,7 +17,7 @@ export class PostEffects {
     return this.actions$.pipe(
       ofType(PostActions.loadMyPosts),
       switchMap(({ page, limit }) =>
-        this.postApi.myPosts(page, limit).pipe(
+        this.postApi.getAllPosts(page, limit).pipe(
           map((response) =>
             PostActions.loadPostsSuccess({
               posts: response.data,

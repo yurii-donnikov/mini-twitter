@@ -6,36 +6,37 @@ import {
   Body,
   Patch,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(AuthGuard('jwt'))
   @Get('/users')
-  getUsers(): any {
-    return this.usersService.getUsers();
+  getAllUsers() {
+    return this.usersService.getAllUsers();
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  getUser(@Param('id') id: string) {
-    return this.usersService.getUser(Number(id));
+  getUserById(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getUserById(id);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
-  removeUser(@Param('id') id: string) {
-    return this.usersService.removeUser(Number(id));
+  deleteUser(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.deleteUser(id);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
-  updateUser(@Param('id') id: string, @Body() dto: UpdateUserDto) {
-    return this.usersService.updateUser(Number(id), dto);
+  updateUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateUserDto,
+  ) {
+    return this.usersService.updateUser(id, dto);
   }
 }
