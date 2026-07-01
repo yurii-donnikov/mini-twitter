@@ -15,7 +15,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.loadUserFromToken),
       switchMap(() =>
-        this.authApi.me().pipe(
+        this.authApi.getMe().pipe(
           switchMap((user) => [
             loginSuccess({ user }),
             loadMyPosts({

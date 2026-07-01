@@ -2,13 +2,13 @@ import {
   Body,
   Controller,
   Get,
-  NotFoundException,
   Param,
   Post,
   UseGuards,
   Delete,
   Req,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { PostService } from './post.service';
@@ -16,7 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 import type { JwtUser } from 'src/interface.type';
 import { PaginationDto } from './dto/pagination.dto';
 
-@Controller('post')
+@Controller('posts')
 export class PostController {
   constructor(
     private readonly postService: PostService,
@@ -25,11 +25,11 @@ export class PostController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('/my')
-  getMe(@Req() req: JwtUser) {
+  getMyPosts(@Req() req: JwtUser) {
     return this.postService.getMyPosts(req.user.id);
   }
 
-  @Get('/posts')
+  @Get()
   getAllPosts(@Query() paginationDto: PaginationDto) {
     return this.postService.getAllPosts(paginationDto);
   }
@@ -37,22 +37,18 @@ export class PostController {
   @UseGuards(AuthGuard('jwt'))
   @Post()
   async createPost(@Body('content') content: string, @Req() req: JwtUser) {
-    const user = await this.usersService.getUser(req.user.id);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-    return this.postService.createPost(content, user);
+    return this.postService.createPost(content, req.user.id);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get(':id')
-  getPosts(@Param('id') id: string) {
-    return this.postService.getPosts(Number(id));
+  @Get('user/:id')
+  getPostsByUserId(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.getPostsByUserId(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
-  removeUser(@Param('id') id: string) {
-    return this.postService.deletePost(Number(id));
+  deletePost(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.deletePost(id);
   }
 }

@@ -5,10 +5,10 @@ import { environment } from '../../../environment';
 import { User } from '../../store/user/user.models';
 
 @Injectable({ providedIn: 'root' })
-export class AuthApi {
+export class UserApi {
   http = inject(HttpClient);
 
-  getMe(): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/auth/me`);
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
   }
 }

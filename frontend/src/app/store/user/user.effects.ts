@@ -3,18 +3,18 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { updateUserSuccess, updateUserFailure, loadUser } from './user.actions';
-import { AuthApi } from '../../core/api/auth.api';
+import { UserApi } from '../../core/api/user.api';
 
 @Injectable()
 export class UserEffects {
   private actions$ = inject(Actions);
-  private authApi = inject(AuthApi);
+  private userApi = inject(UserApi);
 
   getUserById$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadUser),
       switchMap(({ id }) =>
-        this.authApi.userById(id).pipe(
+        this.userApi.getUserById(id).pipe(
           map((user) => {
             return updateUserSuccess({ user });
           }),
